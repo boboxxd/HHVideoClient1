@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "hikvisonwapper.h"
+using namespace Hikvison;
 namespace Ui {
 class PtzWidget;
 }

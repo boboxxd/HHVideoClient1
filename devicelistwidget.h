@@ -23,8 +23,10 @@ public:
     ~DeviceListWidget();
 signals:
     void senddevice(const Camera&);
+    void sendCameraname(const QString &name);
 public slots:
     void onitemDoubleClicked(QListWidgetItem *item);
+    void onitemClicked(QListWidgetItem *item);
 private:
     Ui::DeviceListWidget *ui;
 

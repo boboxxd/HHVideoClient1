@@ -1,10 +1,10 @@
 ﻿#ifndef WIDGET_H
 #define WIDGET_H
-
 #include <QWidget>
 #include "hikvisonwapper.h"
 #include "ptzwidget.h"
 #include "common.h"
+using namespace Hikvison;
 namespace Ui {
 class Widget;
 }
@@ -17,12 +17,13 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 public slots:
-    void test(const QString &msg);
+    void onplayererror(const QString &msg);
     void opencamera(const Camera&);
+    void closeEvent(QCloseEvent *event);
 private:
     Ui::Widget *ui;
     HikvisonWapper *player;
-    //PtzWidget *ptzwidget;
+    Camera dev;
 };
 
 #endif // WIDGET_H

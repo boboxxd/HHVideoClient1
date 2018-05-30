@@ -2,13 +2,14 @@
 #include "ui_devicelistwidget.h"
 #include "sqlhandle.h"
 #include <QDebug>
-
+#include "devideconfig.h"
 DeviceListWidget::DeviceListWidget(QWidget *parent) :
     QListWidget(parent),
     ui(new Ui::DeviceListWidget)
 {
     ui->setupUi(this);
     connect(this,&DeviceListWidget::itemDoubleClicked,this,&DeviceListWidget::onitemDoubleClicked);
+    connect(this,&DeviceListWidget::itemClicked,this,&DeviceListWidget::onitemClicked);
     init();
 }
 
@@ -34,7 +35,7 @@ QListWidgetItem* DeviceListWidget::createItem(const Camera &dev)
     va.setValue(dev);
     QListWidgetItem *item = new QListWidgetItem(this);
     item->setData(Qt::UserRole,va);
-    item->setData(Qt::DisplayRole,dev.brief);
+    item->setData(Qt::DisplayRole,dev.name);
     return item;
 }
 
@@ -55,4 +56,10 @@ void DeviceListWidget::onitemDoubleClicked(QListWidgetItem *item)
     Camera dev= deviceInfo(item);
     qDebug()<<"DeviceListWidget::"<<dev.ip<<dev.port<<dev.username<<dev.password;
     emit senddevice(dev);
+}
+
+void DeviceListWidget::onitemClicked(QListWidgetItem *item)
+{
+    Camera dev= deviceInfo(item);
+    emit sendCameraname(dev.ip);
 }

@@ -31,7 +31,10 @@ SOURCES += \
     videowidget.cpp \
     ptzwidget.cpp \
     devicelistwidget.cpp \
-    sqlhandle.cpp
+    sqlhandle.cpp \
+    alarmmsgview.cpp \
+    alarmmsgmodel.cpp \
+    previewwidget.cpp
 
 HEADERS += \
         widget.h \
@@ -41,7 +44,10 @@ HEADERS += \
     ptzwidget.h \
     devicelistwidget.h \
     sqlhandle.h \
-    common.h
+    common.h \
+    alarmmsgview.h \
+    alarmmsgmodel.h \
+    previewwidget.h
 
 FORMS += \
         widget.ui \

@@ -41,7 +41,7 @@ QVector<Camera> Sqlhandle::readline()
     model->select();
     for (int i = 0; i < model->rowCount(); ++i) {
         Camera dev;
-        dev.brief = model->record(i).value("brief").toString();
+        dev.name = model->record(i).value("name").toString();
         dev.id = model->record(i).value("id").toInt();
         dev.ip = model->record(i).value("ip").toString();
         dev.port = model->record(i).value("port").toInt();

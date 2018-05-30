@@ -10,7 +10,7 @@ struct Camera
     int port;
     QString username;
     QString password;
-    QString brief;
+    QString name;
 };
 Q_DECLARE_METATYPE(Camera)
 
