@@ -14,7 +14,8 @@
    <string>Widget</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -31,6 +32,13 @@
    </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">QWidget #frame
+{
+	border-image: url(:/icon/background.png);
+}
+</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -38,6 +46,18 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>1</number>
+      </property>
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout" stretch="5,30">
         <property name="spacing">
@@ -51,7 +71,9 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(80, 160, 174);</string>
+             <string notr="true">border-image: \*url();
+background-color: rgb(64,148,147);
+color: rgb(206, 233, 239);</string>
             </property>
             <property name="text">
              <string>设备列表</string>
@@ -59,12 +81,38 @@
            </widget>
           </item>
           <item>
-           <widget class="DeviceListWidget" name="listWidget"/>
+           <widget class="DeviceListWidget" name="listWidget">
+            <property name="styleSheet">
+             <string notr="true">QListWidget{
+border-image: \*url();
+color: rgb(255, 255, 255);
+background-color: rgb(139, 191, 197,100);
+}
+QListWidget::Item{
+padding-top:10px; 
+padding-bottom:4px; 
+color:rgb(255, 255, 255); 
+}
+QListWidget::Item:hover{
+background:skyblue; 
+}
+QListWidget::item:selected{
+background:rgb(245, 169, 54); 
+color:rgb(255, 255, 255); 
+}
+QListWidget::item:selected:!active{
+border-width:0px; 
+background:lightgreen; 
+}</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_2">
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(80, 160, 174);</string>
+             <string notr="true">border-image: \*url();
+background-color: rgb(64,148,147);
+color: rgb(206, 233, 239);</string>
             </property>
             <property name="text">
              <string>云台控制</string>
@@ -74,14 +122,14 @@
           <item>
            <widget class="PtzWidget" name="ptzwidget" native="true">
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(85, 87, 83);</string>
+             <string notr="true"/>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="20,6">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="21,6">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -89,14 +137,16 @@
            <widget class="VideoWidget" name="openGLWidget"/>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,30">
+           <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10">
             <property name="spacing">
              <number>0</number>
             </property>
             <item>
              <widget class="QLabel" name="label_3">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(80, 160, 174);</string>
+               <string notr="true">color: rgb(206, 233, 239);
+border-image: \*url();
+background-color: rgb(64,148,147);</string>
               </property>
               <property name="text">
                <string>报警信息</string>
@@ -104,7 +154,23 @@
              </widget>
             </item>
             <item>
-             <widget class="AlarmMsgView" name="tableView"/>
+             <widget class="ImageListWidget" name="imagelistwidget">
+              <property name="styleSheet">
+               <string notr="true">QListWidget{
+border-image: \*url();
+color: rgb(255, 255, 255);
+background-color: rgb(139, 191, 197,100);
+}
+QListWidget::item{border:0px solid gray;}
+QListWidget::item:!selected{}
+QListWidget::Item:hover{
+background:skyblue; 
+}
+QListWidget::item:selected:active{background:rgb(235,171,79);color:#19649F;}
+QListWidget::item:selected{background:#FFFFFF;color:#19649F;}
+</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -136,9 +202,9 @@
    <header>devicelistwidget.h</header>
   </customwidget>
   <customwidget>
-   <class>AlarmMsgView</class>
-   <extends>QTableView</extends>
-   <header>alarmmsgview.h</header>
+   <class>ImageListWidget</class>
+   <extends>QListWidget</extends>
+   <header>imagelistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

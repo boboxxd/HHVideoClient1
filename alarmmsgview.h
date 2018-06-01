@@ -1,6 +1,7 @@
 #ifndef ALARMMSGVIEW_H
 #define ALARMMSGVIEW_H
 #include "alarmmsgmodel.h"
+
 #include <QTableView>
 #include <QSqlQueryModel>
 #include <QTimer>
@@ -12,6 +13,7 @@ public:
     ~AlarmMsgView();
     void initUI();
     void updateview();
+    AlarmmsgModel* mymodel() const;
 signals:
 
 public slots:

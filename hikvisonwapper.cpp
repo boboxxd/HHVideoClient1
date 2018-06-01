@@ -35,7 +35,7 @@ bool HikvisonWapper::open(QString ip,int port,QString username,QString password)
 {
     NET_DVR_DEVICEINFO_V30 struDeviceInfo;
     lUserID = NET_DVR_Login_V30(ip.toLocal8Bit().data(), port, username.toLocal8Bit().data(), password.toLocal8Bit().data(), &struDeviceInfo);
-    if (lUserID < 0)
+    if (lUserID == -1)
     {
         emit playerror();
         return false;
@@ -55,7 +55,7 @@ bool HikvisonWapper::open(QString ip,int port,QString username,QString password)
     struPlayInfo.dwLinkMode = 0; //0- TCP 方式,1- UDP 方式,2- 多播方式,3- RTP 方式,4-RTP/RTSP,5-RSTP/HTTP
     struPlayInfo.bBlocked = 0; //0- 非阻塞取流,1- 阻塞取流
     lRealPlayHandle = NET_DVR_RealPlay_V40(lUserID, &struPlayInfo, NULL, NULL);
-    if(lRealPlayHandle<0)
+    if(lRealPlayHandle == -1)
     {
         emit playerror();
         return false;

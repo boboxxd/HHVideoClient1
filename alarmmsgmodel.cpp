@@ -54,6 +54,13 @@ QVariant AlarmmsgModel::data(const QModelIndex &item, int role) const
         value =QDateTime::fromTime_t(value.toInt()).toString("yyyy-MM-dd hh:mm:ss");
     }
 
+    if(role == Qt::DisplayRole && item.column()==6)
+    {
+        qDebug()<<"item.column()==6";
+        qDebug()<<value.toString();
+        emit sendimagename(value.toString());
+    }
+
     return value;
 }
 

@@ -2,7 +2,7 @@
 #include "ui_devicelistwidget.h"
 #include "sqlhandle.h"
 #include <QDebug>
-#include "devideconfig.h"
+
 DeviceListWidget::DeviceListWidget(QWidget *parent) :
     QListWidget(parent),
     ui(new Ui::DeviceListWidget)

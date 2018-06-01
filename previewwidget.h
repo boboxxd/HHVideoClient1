@@ -8,14 +8,17 @@ class PreviewWidget : public QWidget
     Q_OBJECT
 public:
     explicit PreviewWidget(QWidget *parent = nullptr);
+    void setPixmap(const QString& jpgname);
+    void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
 
 signals:
 
 public slots:
-    void getimagename(const QString& name);
+
 private:
-    QLabel label;
+    int x,y;
     QPixmap pix;
     QString pixname;
 };

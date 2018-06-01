@@ -40,11 +40,16 @@ namespace Hikvison {
         VideoWidget *videowidget;   //播放窗口的指针
         LONG lUserID;
         LONG lRealPlayHandle;
+
         //登录信息
         QString m_ip;
         int m_port;
         QString m_username;
         QString m_password;
+
+        //子码流、主码流
+        int stream_type; //0-主码流,1-子码流
+
     };
 
 }

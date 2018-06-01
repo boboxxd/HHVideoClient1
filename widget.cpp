@@ -11,9 +11,10 @@ Widget::Widget(QWidget *parent) :
     player=new HikvisonWapper(ui->openGLWidget);
     ui->openGLWidget->setPlayer(player);
     ui->ptzwidget->setPlayer(player);
+
     connect(player,&HikvisonWapper::errormsg,this,&Widget::onplayererror);
     connect (ui->listWidget,&DeviceListWidget::senddevice,this,&Widget::opencamera);
-    connect (ui->listWidget,&DeviceListWidget::sendCameraname,ui->tableView,&AlarmMsgView::recievecameraip);
+    connect (ui->listWidget,&DeviceListWidget::sendCameraname,ui->imagelistwidget,&ImageListWidget::recievecameraip);
 }
 
 void Widget::onplayererror(const QString &msg)

@@ -5,6 +5,7 @@
 #include <QHeaderView>
 #include <QModelIndex>
 #include <QLabel>
+
 AlarmMsgView::AlarmMsgView(QWidget *parent) : QTableView(parent)
 {
     initUI();
@@ -39,7 +40,6 @@ AlarmMsgView::AlarmMsgView(QWidget *parent) : QTableView(parent)
     model->setQuery(query);
     model->sort(1, Qt::DescendingOrder);
     this->setModel(model);
-
 }
 
 void AlarmMsgView::initUI()
@@ -75,6 +75,11 @@ void AlarmMsgView::updateview()
                           "where %6 = '%8'").arg("序号")
             .arg("类别").arg("可信度").arg("时间").arg("摄像机名称").arg("摄像机ip").arg("报警图片").arg(cameraip);
     model->setQuery(query);
+}
+
+AlarmmsgModel* AlarmMsgView::mymodel() const
+{
+    return model;
 }
 
 void AlarmMsgView::ondoubleClicked(const QModelIndex &index)

@@ -34,7 +34,8 @@ SOURCES += \
     sqlhandle.cpp \
     alarmmsgview.cpp \
     alarmmsgmodel.cpp \
-    previewwidget.cpp
+    previewwidget.cpp \
+    imagelistwidget.cpp
 
 HEADERS += \
         widget.h \
@@ -47,7 +48,8 @@ HEADERS += \
     common.h \
     alarmmsgview.h \
     alarmmsgmodel.h \
-    previewwidget.h
+    previewwidget.h \
+    imagelistwidget.h
 
 FORMS += \
         widget.ui \
@@ -76,3 +78,8 @@ unix:!macx: LIBS += -L$$PWD/lib/HCNetSDKCom \
 
 INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include
+
+RESOURCES += \
+    icon.qrc
+
+RC_FILE += icon.rc

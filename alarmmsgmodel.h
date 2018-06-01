@@ -10,7 +10,7 @@ public:
     explicit AlarmmsgModel(QObject *parent = nullptr);
     QVariant data(const QModelIndex & item, int role = Qt::DisplayRole) const;
 signals:
-
+    void sendimagename(const QString& name) const;
 public slots:
 };
 
