@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=hhvideo
+Version=2.0.1
+Comment=smartvideo player
+Path=/home/hhit/code/build-HHVideoClient1-unknown-Debug
+Exec=/home/hhit/code/build-HHVideoClient1-unknown-Debug/start.sh
+Icon=/home/hhit/code/build-HHVideoClient1-unknown-Debug/hh.png
+StartupNotify=true
+Type=Application
+X-UnityGenerated=true
+Categories=Application;
+Terminal=false
