@@ -35,7 +35,9 @@ SOURCES += \
     alarmmsgview.cpp \
     alarmmsgmodel.cpp \
     previewwidget.cpp \
-    imagelistwidget.cpp
+    imagelistwidget.cpp \
+    mainlayout.cpp \
+    config.cpp
 
 HEADERS += \
         widget.h \
@@ -49,7 +51,9 @@ HEADERS += \
     alarmmsgview.h \
     alarmmsgmodel.h \
     previewwidget.h \
-    imagelistwidget.h
+    imagelistwidget.h \
+    mainlayout.h \
+    config.h
 
 FORMS += \
         widget.ui \

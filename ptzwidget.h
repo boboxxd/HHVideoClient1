@@ -15,6 +15,7 @@ class PtzWidget : public QWidget
 public:
     explicit PtzWidget(QWidget *parent = 0);
     void setPlayer(HikvisonWapper *wapper);
+    void release();
     ~PtzWidget();
 private:
     Ui::PtzWidget *ui;

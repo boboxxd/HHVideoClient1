@@ -2,7 +2,7 @@
 #define HIKVISONWAPPER_H
 #include <QObject>
 #include <HCNetSDK.h>
-
+typedef QT_PREPEND_NAMESPACE(quintptr) WId;
 class VideoWidget;
 namespace Hikvison {
 
@@ -16,6 +16,7 @@ namespace Hikvison {
          HikvisonWapper(QWidget *widget=nullptr);
         ~HikvisonWapper();
         void setWindow(QWidget *widget);
+        void setWinId(WId id);
         //void close();
     signals:
         void playerror();
@@ -38,6 +39,7 @@ namespace Hikvison {
         void ptzzoomout(int);   //变小
     private:
         VideoWidget *videowidget;   //播放窗口的指针
+        WId wndid;
         LONG lUserID;
         LONG lRealPlayHandle;
 

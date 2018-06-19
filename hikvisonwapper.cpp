@@ -2,6 +2,7 @@
 using namespace Hikvison;
 #include "videowidget.h"
 #include <QDebug>
+#include "config.h"
 void Hikvison::hikvison_init()
 {
     NET_DVR_Init();
@@ -16,7 +17,7 @@ void Hikvison::hikvison_destory()
 
 
 HikvisonWapper::HikvisonWapper(QWidget *widget)
-    :videowidget(qobject_cast<VideoWidget*>(widget)),lUserID(-2),lRealPlayHandle(-2)
+    :videowidget(qobject_cast<VideoWidget*>(widget)),lUserID(0),lRealPlayHandle(0)
 {
     connect(this,&HikvisonWapper::playerror,this,&HikvisonWapper::handleplayerror);
 }
@@ -29,7 +30,14 @@ HikvisonWapper::~HikvisonWapper()
 void HikvisonWapper::setWindow(QWidget *widget)
 {
     videowidget = qobject_cast<VideoWidget*>(widget);
+    wndid = videowidget->winId();
 }
+
+void HikvisonWapper::setWinId(WId id)
+{
+    wndid=id;
+}
+
 
 bool HikvisonWapper::open(QString ip,int port,QString username,QString password)
 {
@@ -45,13 +53,13 @@ bool HikvisonWapper::open(QString ip,int port,QString username,QString password)
     memset(&struPlayInfo,0,sizeof(struPlayInfo));
     if(videowidget != nullptr)
     {
-        struPlayInfo.hPlayWnd =videowidget->winId(); //需要 SDK 解码时句柄设为有效值,仅取流不解码时可设为空
+        struPlayInfo.hPlayWnd =wndid; //需要 SDK 解码时句柄设为有效值,仅取流不解码时可设为空
     }else
     {
         close();
     }
     struPlayInfo.lChannel = 1;//预览通道号
-    struPlayInfo.dwStreamType = 1; //0-主码流,1-子码流,2-码流 3,3-码流 4,以此类推
+    struPlayInfo.dwStreamType = Config::GetConfig()->streamtype(); //0-主码流,1-子码流,2-码流 3,3-码流 4,以此类推
     struPlayInfo.dwLinkMode = 0; //0- TCP 方式,1- UDP 方式,2- 多播方式,3- RTP 方式,4-RTP/RTSP,5-RSTP/HTTP
     struPlayInfo.bBlocked = 0; //0- 非阻塞取流,1- 阻塞取流
     lRealPlayHandle = NET_DVR_RealPlay_V40(lUserID, &struPlayInfo, NULL, NULL);
@@ -84,14 +92,13 @@ void HikvisonWapper::close()
     if(lRealPlayHandle >= 0)
     {
         NET_DVR_StopRealPlay(lRealPlayHandle);
-        lRealPlayHandle = -2;
     }
 
     if(lUserID >= 0)
     {
         NET_DVR_Logout(lUserID);
-        lUserID = -2;
     }
+
 }
 
 
@@ -117,8 +124,6 @@ void HikvisonWapper::handleptzerror()
     emit errormsg(QString("").append(NET_DVR_GetLastError()));
 }
 
-
-
 // state:
 // 0--开始 1--停止
 void HikvisonWapper::ptzup(int state)
@@ -130,7 +135,6 @@ void HikvisonWapper::ptzup(int state)
     }
 }
 
-
 void HikvisonWapper::ptzdown(int state)
 {
     bool re=NET_DVR_PTZControlWithSpeed(lRealPlayHandle, TILT_DOWN,state, 3);
@@ -139,7 +143,6 @@ void HikvisonWapper::ptzdown(int state)
         emit ptzerror();
     }
 }
-
 
 void HikvisonWapper::ptzright(int state)
 {

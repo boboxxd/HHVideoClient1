@@ -22,6 +22,20 @@ void PtzWidget::setPlayer(HikvisonWapper *wapper)
     }
 }
 
+void PtzWidget::release()
+{
+    if(this->wapper)
+    {
+        disconnect(ui->upbtn,&PTZButton::sendstate,this->wapper,&HikvisonWapper::ptzup);
+        disconnect(ui->downbtn,&PTZButton::sendstate,this->wapper,&HikvisonWapper::ptzdown);
+        disconnect(ui->leftbtn,&PTZButton::sendstate,this->wapper,&HikvisonWapper::ptzleft);
+        disconnect(ui->rightbtn,&PTZButton::sendstate,this->wapper,&HikvisonWapper::ptzright);
+        disconnect(ui->zoominbtn,&PTZButton::sendstate,this->wapper,&HikvisonWapper::ptzzoomin);
+        disconnect(ui->zoomoutbtn,&PTZButton::sendstate,this->wapper,&HikvisonWapper::ptzzoomout);
+    }
+    wapper = nullptr;
+}
+
 PtzWidget::~PtzWidget()
 {
     delete ui;

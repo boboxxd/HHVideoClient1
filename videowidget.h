@@ -12,8 +12,11 @@ public:
     void setPlayer(HikvisonWapper *player);
     void contextMenuEvent(QContextMenuEvent* e);
     void mouseDoubleClickEvent(QMouseEvent *event);
-    void resizeEvent(QResizeEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void closeEvent(QCloseEvent *event);
+
 signals:
+    void sendWId(WId);
 public slots:
 private:
     HikvisonWapper *player;
