@@ -4,6 +4,10 @@
 #include <QMessageBox>
 #include "config.h"
 
+#include <QMenuBar>
+#include <QPushButton>
+#include <QToolBar>
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -11,6 +15,9 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     Hikvison::hikvison_init();
     init();
+
+    addMenuWidget();
+
     setSplitScreenNum(Config::GetConfig()->screennum());
     connect (ui->listWidget,&DeviceListWidget::senddevice,this,&Widget::opencamera);
     connect (ui->listWidget,&DeviceListWidget::sendCameraname,ui->imagelistwidget,&ImageListWidget::recievecameraip);
@@ -46,6 +53,38 @@ void Widget::curscreenindexplus1()
             }
             break;
         }
+}
+
+void Widget::addMenuWidget()
+{
+    //菜单栏
+    auto menuBar = new QMenuBar(this);
+    QMenu *viewmenu = new QMenu(tr("视图"),this);
+    menuBar->addMenu(viewmenu);
+    QMenu *screenmenu = new QMenu(tr("分屏"),menuBar);
+    viewmenu->addMenu(screenmenu);
+
+    QAction *onescreen = new QAction(QIcon(":/icon/1.png"),tr(""),this);
+    QAction *fourscreen = new QAction(QIcon(":/icon/4.png"),tr(""),this);
+    QAction *ninescreen = new QAction(QIcon(":/icon/9.png"),tr(""),this);
+    screenmenu->addAction(onescreen);
+    screenmenu->addAction(fourscreen);
+    screenmenu->addAction(ninescreen);
+    this->layout()->setMenuBar(menuBar);//用setMenuBar进行添加
+
+    connect(onescreen,&QAction::triggered,[this](){setSplitScreenNum(0);});
+    connect(fourscreen,&QAction::triggered,[this](){setSplitScreenNum(1);});
+    connect(ninescreen,&QAction::triggered,[this](){setSplitScreenNum(2);});
+
+    //工具栏
+    auto toolbar = new QToolBar(this);
+    toolbar->addAction(onescreen);
+    toolbar->addAction(fourscreen);
+    toolbar->addAction(ninescreen);
+    toolbar->setFixedWidth(130);
+    int x=toolbar->x()+100;
+    int y=toolbar->y();
+    toolbar->move(x,y);
 }
 
 void Widget::opencamera(const Camera& dev)
@@ -96,6 +135,9 @@ Widget::~Widget()
 
 void Widget::init()
 {
+
+
+
     connect(this,&Widget::screennum,ui->mainwidget,&MainLayout::setScreenCount);
     connect(ui->mainwidget,&MainLayout::currentScreenIndex,this,&Widget::showcheckscreen);
     ui->mainwidget->setScreenCount(4);

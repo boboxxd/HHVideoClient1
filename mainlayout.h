@@ -23,6 +23,7 @@ private:
     void initpage1();
     void initpage2();
     void initpage3();
+    void closeAllPlayer();
     void destory();
 private:
     QWidget *page1;//页面１

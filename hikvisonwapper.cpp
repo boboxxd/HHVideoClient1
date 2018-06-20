@@ -49,7 +49,7 @@ bool HikvisonWapper::open(QString ip,int port,QString username,QString password)
         return false;
     }
 
-    NET_DVR_PREVIEWINFO struPlayInfo;
+
     memset(&struPlayInfo,0,sizeof(struPlayInfo));
     if(videowidget != nullptr)
     {
@@ -82,21 +82,41 @@ bool HikvisonWapper::open(QString ip,int port,QString username,QString password)
 
 void HikvisonWapper::reopen()
 {
-    open(m_ip,m_port,m_username,m_password);
+    qDebug()<<"lUserId = "<<lUserID;
+    if(lUserID<0)
+    {
+        return;
+    }
+
+    if(lRealPlayHandle >= 0)
+    {
+        NET_DVR_StopRealPlay(lRealPlayHandle);
+        lRealPlayHandle =-1;
+    }
+
+    lRealPlayHandle = NET_DVR_RealPlay_V40(lUserID, &struPlayInfo, NULL, NULL);
+    printf("%x\n",lRealPlayHandle);
+    if(lRealPlayHandle == -1)
+    {
+        emit playerror();
+    }
 }
 
 
 
 void HikvisonWapper::close()
 {
+    qDebug()<<"close"<<endl;
     if(lRealPlayHandle >= 0)
     {
         NET_DVR_StopRealPlay(lRealPlayHandle);
+        lRealPlayHandle =-1;
     }
 
     if(lUserID >= 0)
     {
         NET_DVR_Logout(lUserID);
+        lUserID = -1;
     }
 
 }

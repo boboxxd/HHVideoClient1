@@ -42,7 +42,7 @@ namespace Hikvison {
         WId wndid;
         LONG lUserID;
         LONG lRealPlayHandle;
-
+        NET_DVR_PREVIEWINFO struPlayInfo;
         //登录信息
         QString m_ip;
         int m_port;

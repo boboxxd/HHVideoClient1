@@ -28,6 +28,8 @@ signals:
     void screennum(int);
 private:
     void curscreenindexplus1();
+
+    void addMenuWidget();
 private:
     Ui::Widget *ui;
     Camera dev;
@@ -36,6 +38,7 @@ private:
     int currentpage;
     WId curscreen;
     QMap<int,HikvisonWapper*> map;
+
 };
 
 #endif // WIDGET_H

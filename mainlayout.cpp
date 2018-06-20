@@ -53,15 +53,15 @@ void MainLayout::setScreenCount(int num)
     {
     case 1:
         setCurrentIndex(0);
-
+        closeAllPlayer();
         break;
     case 4:
         setCurrentIndex(1);
-
+        closeAllPlayer();
         break;
     case 9:
         setCurrentIndex(2);
-
+        closeAllPlayer();
         break;
     }
 }
@@ -150,6 +150,15 @@ void MainLayout::initpage3()
     layout->setSpacing(1);
     layout->setContentsMargins(0,0,0,0);
     page3->setLayout(layout);
+}
+
+void MainLayout::closeAllPlayer()
+{
+    for(int i = 0;i<14;i++)
+    {
+        if(videowidgets[i]->isplayerwork())
+            videowidgets[i]->stopPlayer();
+    }
 }
 
 void MainLayout::destory()

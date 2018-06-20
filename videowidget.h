@@ -14,7 +14,9 @@ public:
     void mouseDoubleClickEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void closeEvent(QCloseEvent *event);
-
+    bool isplayerwork();
+    void startPlayer();
+    void stopPlayer();
 signals:
     void sendWId(WId);
 public slots:

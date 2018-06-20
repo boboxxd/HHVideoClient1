@@ -33,18 +33,20 @@ void VideoWidget::contextMenuEvent(QContextMenuEvent* e)
 
 void VideoWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
+    if(player == nullptr)
+        return;
     if(event->button()==Qt::LeftButton)
     {
         if(isFullScreen() == false)
         {
             setWindowFlags(Qt::Window);
             showFullScreen();
-
+            startPlayer();
         }else
         {
-            setWindowFlags(Qt::SubWindow);
+            setWindowFlags(Qt::SubWindow);        
             showNormal();
-
+            startPlayer();
         }
     }
     return QOpenGLWidget::mouseDoubleClickEvent(event);
@@ -66,4 +68,20 @@ void VideoWidget::closeEvent(QCloseEvent *event)
     player->close();
     player = nullptr;
     return QOpenGLWidget::closeEvent(event);
+}
+
+bool VideoWidget::isplayerwork()
+{
+    return (player == NULL)?false:true;
+}
+
+void VideoWidget::startPlayer()
+{
+    player->reopen();
+}
+
+void VideoWidget::stopPlayer()
+{
+    player->close();
+    player= NULL;
 }
